@@ -4,6 +4,8 @@ import ensureEmailExistsMiddleware from "../middlewares/users/ensureEmailExists.
 import ensureDataValidMiddleware from "../middlewares/users/ensureDataValid.middlewares"
 import { updateUserSchema, userCreateSchema } from "../schemas/users.schemas"
 import ensureUserExistsMiddleware from "../middlewares/users/ensureUserExists.middlewares"
+import { ensureTokenValidMiddleware } from "../middlewares/ensureTokenValid.middlewares"
+import ensureIsOwnerMiddleware from "../middlewares/users/ensureIsOwner.middlewares"
 
 
 const userRoutes: Router = Router()
@@ -15,20 +17,28 @@ userRoutes.post(
  createUserController
 )
 userRoutes.get(
-    "", readUserController
+    "",
+    ensureTokenValidMiddleware,
+    readUserController
 )
 userRoutes.get(
     "/:id",
+    ensureTokenValidMiddleware,
+    ensureIsOwnerMiddleware,
     ensureUserExistsMiddleware,
     retriveUserController
 )
 userRoutes.delete(
     "/:id",
+    ensureTokenValidMiddleware,
+    ensureIsOwnerMiddleware,
     ensureUserExistsMiddleware,
     deleteUserController
 )
 userRoutes.patch(
     "/:id",
+    ensureTokenValidMiddleware,
+    ensureIsOwnerMiddleware,
     ensureUserExistsMiddleware,
     ensureDataValidMiddleware(updateUserSchema),
     updateUserController

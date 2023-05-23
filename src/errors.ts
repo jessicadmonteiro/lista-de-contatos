@@ -31,7 +31,7 @@ const handleErros = (error: any, req: Request, res: Response, _:NextFunction) =>
 
 
     return res.status(500).json({
-        message: "Internal server error"
+        message: "Erro do Servidor Interno"
     })
 }
 
