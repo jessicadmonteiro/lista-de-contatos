@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken"
 import "dotenv/config"
 import { AppError } from "../errors"
 
+
 const ensureTokenValidMiddleware = (req: Request, res: Response, next: NextFunction): Response | void =>{
     let token = req.headers.authorization
 

@@ -5,6 +5,7 @@ import { User } from "../../entities/user.entities"
 import { AppError } from "../../errors"
 import { compare } from "bcryptjs"
 import  jwt  from "jsonwebtoken"
+import "dotenv/config"
 
 const createLoginService = async (loginData: iLogin): Promise<string> => {
 
