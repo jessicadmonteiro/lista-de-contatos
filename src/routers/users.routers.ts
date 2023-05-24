@@ -24,22 +24,22 @@ userRoutes.get(
 userRoutes.get(
     "/:id",
     ensureTokenValidMiddleware,
-    ensureIsOwnerMiddleware,
     ensureUserExistsMiddleware,
+    ensureIsOwnerMiddleware,
     retriveUserController
 )
 userRoutes.delete(
     "/:id",
     ensureTokenValidMiddleware,
-    ensureIsOwnerMiddleware,
     ensureUserExistsMiddleware,
+    ensureIsOwnerMiddleware,
     deleteUserController
 )
 userRoutes.patch(
     "/:id",
     ensureTokenValidMiddleware,
-    ensureIsOwnerMiddleware,
     ensureUserExistsMiddleware,
+    ensureIsOwnerMiddleware,
     ensureDataValidMiddleware(updateUserSchema),
     updateUserController
 )
