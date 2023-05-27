@@ -24,6 +24,7 @@ const createContactService = async (contactData: iContact, idUser: number): Prom
     const contact = contactRepository.create({
         username: contactData.username,
         telephone: contactData.telephone,
+        email: contactData.email!,
         user
     })
 
