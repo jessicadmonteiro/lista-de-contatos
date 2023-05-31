@@ -17,7 +17,7 @@ class Contact {
     @Column({type: "varchar", length: 127})
     username: string
 
-    @Column({type: "varchar", length: 45, unique: true, nullable: true})
+    @Column({type: "varchar", length: 45, nullable: true})
     email?: string | null | undefined
 
     @Column({type: "varchar", length: 13})

@@ -12,8 +12,8 @@ npm install dotenv -
 npm install typescript ts-node-dev @types/express --save-dev
 npm i -S zod
 npm install express-async-errors
-npm i pg pg-format
-npm i -D @types/pg @types/pg-format
+npm i pg
+npm i -D @types/pg
 npm i -S typeorm reflect-metadata dotenv pg
 
 
