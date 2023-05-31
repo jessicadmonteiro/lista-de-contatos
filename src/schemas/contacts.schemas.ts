@@ -27,7 +27,10 @@ const returnContactSchema = z.object({
     telephone: z.string().
     regex(/^(?:(?:\+|00)?(55)\s?)?(?:(?:\(?[1-9][0-9]\)?)?\s?)?(?:((?:9\d|[2-9])\d{3})-?(\d{4}))$/, "Adicione um número de telefone valido!"),
     createdAt: z.string(),
-    updatedAt: z.string()
+    updatedAt: z.string(),
+    userId: z.number()
+}).omit({
+    userId: true
 })
 
 const updateContactSchema = contactCreatetSchema.partial()

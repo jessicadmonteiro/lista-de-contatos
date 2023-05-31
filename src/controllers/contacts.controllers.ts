@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { iContact } from "../interfaces/contacts.interface"
+import { iContactReturn } from "../interfaces/contacts.interface"
 import createContactService from "../services/contacts/createContact.services"
 import retriveContactService from "../services/contacts/retriveContact.services"
 import updateContactService from "../services/contacts/updateContact.services"
@@ -7,7 +7,7 @@ import deleteContactService from "../services/contacts/deleteContact.services"
 
 const createContactController = async (req: Request, res: Response): Promise<Response> => {
     
-    const contactData: iContact = req.body
+    const contactData: iContactReturn = req.body
     const idUser: number = parseInt(res.locals.userId)
 
     const contact = await createContactService(contactData, idUser)
