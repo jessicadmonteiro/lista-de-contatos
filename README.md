@@ -232,17 +232,20 @@ Url: https://lista-de-contatos.onrender.com/contacts
 
 Exemplo de dados de entrada para criação do contato:
 {
-	"username": "Jenny",
-	"email": "jenny@gmail.com",
+	"username": "caroline",
+	"email": "caroline@gmail.com",
 	"telephone": "62911111111"
 }
 
 
 Retorno de resposta caso de sucesso:
 {
-	"username": "Jenny",
-	"email": "jenny@gmail.com",
-	"telephone": "62911111111"
+	"id": 9,
+	"username": "caroline",
+	"email": "caroline@gmail.com",
+	"telephone": "62911111111",
+	"createdAt": "2023-06-01",
+	"updatedAt": "2023-06-01"
 }
 
 

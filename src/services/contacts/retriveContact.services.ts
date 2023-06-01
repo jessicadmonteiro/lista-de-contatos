@@ -3,13 +3,18 @@ import { AppDataSource } from "../../data-source"
 import { AppError } from "../../errors"
 import { User } from "../../entities/user.entities"
 
-const retriveContactService = async (userId: number) => {
+const retriveContactService = async (userId: number): Promise <User[]> => {
 
     const userRepository: Repository<User> = AppDataSource.getRepository(User)
 
-    const user: User | null = await userRepository.findOne({
+    const user: Array<User>= await userRepository.find({
         where: {
             id: userId
+        },
+        select: {
+            username: true,
+            email: true,
+            telephone:true
         },
         relations: {
             contacts: true
@@ -20,10 +25,7 @@ const retriveContactService = async (userId: number) => {
         throw new AppError("Contato não encontrado", 404)
     }
 
-    if(user){
-        const {password, createdAt, updatedAt, deletedAt, ...userData} = user
-        return userData
-    }
+    return user
 
 }
 

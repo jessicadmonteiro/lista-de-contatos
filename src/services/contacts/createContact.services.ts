@@ -21,13 +21,19 @@ const createContactService = async (contactData: iContact, idUser: number): Prom
         throw new AppError("Usuário não encontrado", 404)
     }
 
-    const contact = contactRepository.create(contactData)
+    const contact= contactRepository.create({
+        username: contactData.username,
+        email: contactData.email,
+        telephone: contactData.telephone,
+        user: user
+    })
 
     await contactRepository.save(contact)
 
     const newContact = returnContactSchema.parse(contact)
 
     return newContact
+    
 
 }
 
