@@ -1,6 +1,33 @@
 # Backend Lista de Contatos
 
-O Backend Lista de Contatos é uma aplicação de servidor responsável por gerenciar as operações relacionadas aos contatos em uma lista de contatos. Esta aplicação utiliza as seguintes tecnologias e bibliotecas:
+Lista de Contatos é uma aplicação de servidor responsável por gerenciar as operações relacionadas aos contatos em uma lista.
+
+## Utilizando a Aplicação
+
+A aplicação pode ser acessada de duas formas: através de uma URL de implantação (deploy) ou executando localmente em sua máquina.
+
+### Acesso via URL de Implantação
+
+Uma versão da aplicação foi implantada e está disponível em uma URL específica. Você pode acessar a aplicação através do seguinte link: [https://lista-de-contatos.onrender.com].
+
+### Execução Local
+
+## Instalações
+
+Caso deseje executar a aplicação localmente em sua máquina, siga as instruções abaixo:
+
+1. Certifique-se de ter o [Node.js](https://nodejs.org/) instalado em sua máquina.
+2. Clone este repositório.
+3. Execute o comando `npm install` ou `npm i` para instalar as dependências.
+4. Crie a base de dados no PostgreSQL, e crie um arquivo ".env" sequindo a estrutura do ".env.example."
+5. Execute o comando `npm run typeorm migration:run -- -d ./src/data-source` para execultar as migrações e gerenciar o esquema do banco de dados.
+6. Após a instalação das dependências, execute o comando `npm run dev` para iniciar o servidor.
+7. O servidor será iniciado localmente e estará acessível através do seguinte endereço: `http://localhost:3000`.
+
+Agora você pode escolher entre acessar a aplicação através da URL de implantação ou executá-la localmente em sua máquina, dependendo das suas necessidades e preferências.
+
+
+Esta aplicação utiliza as seguintes tecnologias e bibliotecas:
 
 - [Node.js](https://nodejs.org/): Ambiente de execução para JavaScript.
 - [TypeScript](https://www.typescriptlang.org/): Uma linguagem de programação que adiciona tipagem estática ao JavaScript.
@@ -25,7 +52,6 @@ As principais dependências utilizadas no projeto incluem:
 - [express-async-errors](https://www.npmjs.com/package/express-async-errors): Um pacote para tratamento de erros assíncronos em rotas do Express.
 - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken): Uma biblioteca para gerar e verificar tokens de autenticação.
 - [pg](https://www.npmjs.com/package/pg): Um cliente PostgreSQL para Node.js.
-- [pg-format](https://www.npmjs.com/package/pg-format): Uma biblioteca para formatação de consultas SQL no PostgreSQL.
 - [typeorm](https://www.npmjs.com/package/typeorm): Um ORM (Object-Relational Mapping) para Node.js e TypeScript.
 - [zod](https://www.npmjs.com/package/zod): Uma biblioteca para validação de dados.
 
@@ -38,41 +64,16 @@ As dependências de desenvolvimento incluem tipos de bibliotecas utilizadas para
 - [@types/express](https://www.npmjs.com/package/@types/express)
 - [@types/jsonwebtoken](https://www.npmjs.com/package/@types/jsonwebtoken)
 - [@types/pg](https://www.npmjs.com/package/@types/pg)
-- [@types/pg-format](https://www.npmjs.com/package/@types/pg-format)
 - [ts-node-dev](https://www.npmjs.com/package/ts-node-dev): Um pacote para reiniciar automaticamente o servidor ao detectar alterações no código TypeScript.
 - [typescript](https://www.npmjs.com/package/typescript): O compilador TypeScript.
-
-Certifique-se de ter o Node.js instalado antes de executar os comandos mencionados.
-
-## Utilizando a Aplicação
-
-A aplicação pode ser acessada de duas formas: através de uma URL de implantação (deploy) ou executando localmente em sua máquina.
-
-### Acesso via URL de Implantação
-
-Uma versão da aplicação foi implantada e está disponível em uma URL específica. Você pode acessar a aplicação através do seguinte link: [https://lista-de-contatos.onrender.com].
-
-### Execução Local
-
-## Instalações
-
-Caso deseje executar a aplicação localmente em sua máquina, siga as instruções abaixo:
-
-1. Certifique-se de ter o [Node.js](https://nodejs.org/) instalado em sua máquina.
-2. Clone este repositório.
-3. Navegue até o diretório do projeto: `cd backend-contatos`.
-4. Execute o comando `npm install` ou `npm i` para instalar as dependências.
-5. Após a instalação das dependências, execute o comando `npm run dev` para iniciar o servidor.
-6. O servidor será iniciado localmente e estará acessível através do seguinte endereço: `http://localhost:3000`.
-
-Agora você pode escolher entre acessar a aplicação através da URL de implantação ou executá-la localmente em sua máquina, dependendo das suas necessidades e preferências.
 
 
 ### CRUD do Usuário
 
 # POST - Criação de usuário
 
-URL: `https://lista-de-contatos.onrender.com/users`
+Execução Local URL: `http://localhost:3000/users`
+URL Deploy : `https://lista-de-contatos.onrender.com/users`
 
 Exemplo de dados de entrada para criação do usuário:
 {
@@ -83,6 +84,7 @@ Exemplo de dados de entrada para criação do usuário:
 }
 
 Retorno de resposta:
+status: 200
 {
 	"username": "ana",
 	"email": "ana@gmail.com",
@@ -94,8 +96,8 @@ Retorno de resposta:
 }
 
 # POST Login - Conecte-se
-
-URL: `https://lista-de-contatos.onrender.com/login`
+Execução Local URL: `http://localhost:3000/login`
+URL Deploy: `https://lista-de-contatos.onrender.com/login`
 
 
 Exemplo de entrada para se conectar:
@@ -106,12 +108,14 @@ Exemplo de entrada para se conectar:
 
 
 Retorno de resposta caso de sucesso:
+status: 200
 {
 	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuYUBnbWFpbC5jb20iLCJpYXQiOjE2ODU1MzkzOTYsImV4cCI6MTY4NTYyNTc5Niwic3ViIjoiMTEifQ.5RwKqmgCqhHwHcW_WHMK5mOwcVrw6Ejp3CsmwX2Lk7g"
 }
 
 
 Retorno quando passado dados inválidos:
+status: 401
 {
 	"message": "Credenciais inválidas"
 }
@@ -119,11 +123,14 @@ Retorno quando passado dados inválidos:
 
 # GET - Lista de usuários
 
-É necessário esta autenticado com token válido.
+Observações:
+1. É necessário esta autenticado com token válido.
 
-URL: `https://lista-de-contatos.onrender.com/users`
+Execução Local URL: `http://localhost:3000/users`
+URL Deploy: `https://lista-de-contatos.onrender.com/users`
 
 Retorno de resposta caso de sucesso:
+status:200
 [  
     {
 		"username": "eva",
@@ -147,20 +154,24 @@ Retorno de resposta caso de sucesso:
 
 
 Retorno de resposta caso não possua token:
+status: 401
 {
-	"message": "jwt must be provided"
+	"message": "Token inválido"
 }
 
 
 # GET - Recuperar dados do usuário
 
-É necessário esta autenticado com token válido.
-Apenas o dono do id passado que pode ver seus dados.
-No exemplo da url o 12 passado no último parâmetro é o id do usuário.
+Observações:
+1. É necessário esta autenticado com token válido.
+2. Apenas o dono do id passado que tem acesso aos seus dados.
+3. No exemplo da url o 12 passado no último parâmetro é o id do usuário.
 
-URL: `https://lista-de-contatos.onrender.com/users/12`
+Execução Local URL: `http://localhost:3000/users/12`
+URL Deploy: `https://lista-de-contatos.onrender.com/users/12`
 
 Retorno de resposta caso de sucesso:
+status: 200
 {
 	"username": "zoe",
 	"email": "zoe@gmail.com",
@@ -173,24 +184,28 @@ Retorno de resposta caso de sucesso:
 
 
 Retorno sem premissão:
+status: 403
 {
 	"message": "Permissão insuficiente"
 }
 
 
 Retorno de resposta caso não possua token:
+status: 401
 {
-	"message": "jwt must be provided"
+	"message": "Token inválido"
 }
 
 
 # PATH - Atualizar dados do usuário
 
-É necessário esta autenticado com token válido.
-Apenas o dono do id passado que pode atualizar seus dados.
-No exemplo da url o 12 passado no último parâmetro é o id do usuário.
+Observações:
+1. É necessário esta autenticado com token válido.
+2. Apenas o dono do id passado que tem acesso para atualizar seus dados.
+3. No exemplo da url o 12 passado no último parâmetro é o id do usuário.
 
-URL: `https://lista-de-contatos.onrender.com/users/12`
+Execução Local URL: `http://localhost:3000/users/12`
+URL Deploy: `https://lista-de-contatos.onrender.com/users/12`
 
 Exemplo de dados de entrada para Atualização do usuário:
 {
@@ -201,6 +216,7 @@ Exemplo de dados de entrada para Atualização do usuário:
 
 
 Retorno de resposta caso de sucesso:
+status: 200
 {
 	"username": "zoe maria",
 	"email": "zoemaria@gmail.com",
@@ -213,49 +229,56 @@ Retorno de resposta caso de sucesso:
 
 
 Retorno sem premissão:
+status:403
 {
 	"message": "Permissão insuficiente"
 }
 
 
 Retorno quando não possui usuário com o id passado:
+status: 404
 {
 	"message": "Usuário não encontrado"
 }
 
 Retorno de resposta caso não possua token:
 {
-	"message": "jwt must be provided"
+	"message": "Token inválido"
 }
 
 
 # DELETE - Deletar usuário
 
-É necessário esta autenticado com token válido.
-Apenas o dono do id passado que pode deletar sua conta.
-No exemplo da url o 12 passado no último parâmetro é o id do usuário.
+Observações:
+1. É necessário esta autenticado com token válido.
+2. Apenas o dono do id passado que tem acesso para deletar sua conta.
+3. No exemplo da url o 12 passado no último parâmetro é o id do usuário.
 
-URL: `https://lista-de-contatos.onrender.com/users/12`
+Execução Local URL: `http://localhost:3000/users/12`
+URL Deploy: `https://lista-de-contatos.onrender.com/users/12`
 
 Retorno de resposta caso de sucesso:
-    204 No Content
+status: 204 
 
 
 Retorno sem premissão:
+status:403
 {
 	"message": "Permissão insuficiente"
 }
 
 
 Retorno quando não possui usuário com o id passado:
+status: 404
 {
 	"message": "Usuário não encontrado"
 }
 
 
 Retorno de resposta caso não possua token:
+status: 401
 {
-	"message": "jwt must be provided"
+	"message": "Token inválido"
 }
 
 
@@ -263,9 +286,11 @@ Retorno de resposta caso não possua token:
 
 # POST - Criação de contato
 
-É necessário esta autenticado com token válido.
+Observações:
+1. É necessário esta autenticado com token válido.
 
-URL: `https://lista-de-contatos.onrender.com/contacts`
+Execução Local URL: `http://localhost:3000/contacts`
+URL Deploy: `https://lista-de-contatos.onrender.com/contacts`
 
 Exemplo de dados de entrada para criação do contato:
 {
@@ -276,6 +301,7 @@ Exemplo de dados de entrada para criação do contato:
 
 
 Retorno de resposta caso de sucesso:
+status: 201
 {
 	"id": 9,
 	"username": "caroline",
@@ -287,21 +313,25 @@ Retorno de resposta caso de sucesso:
 
 
 Retorno de resposta caso não possua token:
+status: 401
 {
-	"message": "jwt must be provided"
+	"message": "Token inválido"
 }
 
 
 # GET - Listar dados do usuário e seus contatos
 
-É necessário esta autenticado com token válido.
-Apenas o dono do id passado que pode ver a listagem dos seus contatos.
-No exemplo da url o 13 passado no último parâmetro é o id do usuário.
+Observações:
+1. É necessário esta autenticado com token válido.
+2. Apenas o dono do id passado que tem acesso a listagem dos seus contatos.
+3. No exemplo da url o 13 passado no último parâmetro é o id do usuário.
 
-URL: `https://lista-de-contatos.onrender.com/contacts/users/13`
+Execução Local URL: `http://localhost:3000/contacts/users/13`
+URL Deploy: `https://lista-de-contatos.onrender.com/contacts/users/13`
 
 
 Retorno de resposta caso de sucesso:
+status: 200
 {
 	"id": 13,
 	"username": "zoe",
@@ -329,32 +359,36 @@ Retorno de resposta caso de sucesso:
 
 
 Retorno sem premissão:
+status: 403
 {
 	"message": "Permissão insuficiente"
 }
 
 
 Retorno quando não possui usuário com o id passado:
+status: 404
 {
 	"message": "Usuário não encontrado"
 }
 
 
 Retorno de resposta caso não possua token:
+status:401
 {
-	"message": "jwt must be provided"
+	"message": "Token inválido"
 }
 
 
 # PATH - Atualização de dados do contato
 
-É necessário esta autenticado com token válido.
-Apenas o dono do token passado que pode atualizar um dado de contato associado a sua conta.
-No exemplo da url o 110 passado no último parâmetro é o id do contato a ser atualizado.
+Observações:
+1. É necessário esta autenticado com token válido.
+2. Apenas o dono do token passado possui acesso para atualizar um dado de contato associado a sua conta.
+3. No exemplo da url o 110 passado no último parâmetro é o id do contato a ser atualizado.
+4. No exemplo a seguir foi atualizado apenas o nome do contato, mais pode ser alterado os demas dados.
 
-URL: `https://lista-de-contatos.onrender.com/contacts/110`
-
-No exemplo a seguir foi atualizado apenas o nome do contato, mais pode ser auterado os demas dados.
+Execução Local URL: `http://localhost:3000/contacts/110`
+URL Deploy: `https://lista-de-contatos.onrender.com/contacts/110`
 
 Exemplo de dados de entrada para Atualização do usuário:
 {
@@ -363,6 +397,7 @@ Exemplo de dados de entrada para Atualização do usuário:
 
 
 Retorno de resposta caso de sucesso:
+status: 200
 {
 	"id": 110,
 	"username": "Jenny Rayane",
@@ -374,48 +409,55 @@ Retorno de resposta caso de sucesso:
 
 
 Retorno sem premissão:
+status: 403
 {
 	"message": "Permissão insuficiente"
 }
 
 
 Retorno quando não possui contato com o id passado:
+status: 404
 {
 	"message": "Contato não encontrado"
 }
 
 
 Retorno de resposta caso não possua token:
+status: 401
 {
-	"message": "jwt must be provided"
+	"message": "Token inválido"
 }
 
 
 # DELETE - Deletar contato
 
-É necessário esta autenticado com token válido.
-Apenas o dono do token passado que pode atualizar um dado de contato associado a sua conta.
-No exemplo da url o 110 passado no último parâmetro é o id do contato a ser deletado.
+Observações:
+1. É necessário esta autenticado com token válido.
+2. Apenas o dono do token passado possui acesso para deletar um dado de contato associado a sua conta.
+3. No exemplo da url o 110 passado no último parâmetro é o id do contato a ser deletado.
 
-URL: `https://lista-de-contatos.onrender.com/contacts/110`
+Execução Local URL: `http://localhost:3000/contacts/110`
+URL Deploy: `https://lista-de-contatos.onrender.com/contacts/110`
 
 Retorno de resposta caso de sucesso:
-    204 No Content
-
+status: 204
 
 Retorno sem premissão:
+status: 403
 {
 	"message": "Permissão insuficiente"
 }
 
 
 Retorno quando não possui contato com o id passado:
+status: 404
 {
 	"message": "Contato não encontrado"
 }
 
 
 Retorno de resposta caso não possua token:
+status: 401
 {
-	"message": "jwt must be provided"
+	"message": "Token inválido"
 }
